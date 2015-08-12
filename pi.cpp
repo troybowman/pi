@@ -15,6 +15,31 @@ void MyTextEdit::msg(const char *format, ...)
 }
 
 //-------------------------------------------------------------------------
+void PiWin::showColorDialog()
+{
+  colorDlgTimer.start(1000, this);
+  te->msg("waiting...\n");
+}
+
+//-------------------------------------------------------------------------
+void PiWin::timerEvent(QTimerEvent *e)
+{
+  if ( e->timerId() == colorDlgTimer.timerId() )
+  {
+    colorDlgTimer.stop();
+    QColorDialog::getColor();
+  }
+  else if ( e->timerId() == timer1.timerId() )
+  {
+    te->msg("timer1\n");
+  }
+  else if ( e->timerId() == timer2.timerId() )
+  {
+    te->msg("timer2\n");
+  }
+}
+
+//-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
   te = new MyTextEdit;
@@ -22,6 +47,18 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   te->setReadOnly(true);
   setCentralWidget(te);
   setObjectName("PiWin");
+
+  fileMenu = new QMenu("File");
+  //connect(fileMenu, SIGNAL(aboutToShow()), this, SLOT(prepareFileMenu()), Qt::DirectConnection);
+  menuBar()->addMenu(fileMenu);
+
+  colors = new QAction(this);
+  colors->setText("show color dialog\n");
+  connect(colors, SIGNAL(triggered()), this, SLOT(showColorDialog()), Qt::DirectConnection);
+  fileMenu->addAction(colors);
+
+  timer1.start(1100, this);
+  timer2.start(1700, this);
 }
 
 //-------------------------------------------------------------------------

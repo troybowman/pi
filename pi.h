@@ -47,13 +47,23 @@ class PiWin : public QMainWindow
   typedef QMainWindow inherited;
 
   MyTextEdit *te;
+  QMenu *fileMenu;
+  QAction *colors;
+
+  QBasicTimer timer1;
+  QBasicTimer timer2;
+  QBasicTimer colorDlgTimer;
 
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
+  virtual void timerEvent(QTimerEvent *e);
 
 public:
   PiWin(QWidget *parent = 0);
   virtual ~PiWin() {}
+
+public slots:
+  void showColorDialog();
 };
 
 #endif // PI_H
