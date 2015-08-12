@@ -19,10 +19,7 @@ QMAKE_CFLAGS_WARN_ON += $${CFLAGS}
 HEADERS += pi.h
 SOURCES += pi.cpp
 
-equals(QT_MAJOR_VERSION, 5) {
-  DEFINES += __QT5__
-  QMAKE_LFLAGS += -framework QtWidgets
-}
+QMAKE_LFLAGS += -framework QtWidgets
 
 CONFIG -= release release_and_debug
 CONFIG += debug

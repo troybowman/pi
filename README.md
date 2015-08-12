@@ -1,5 +1,3 @@
 A simple Qt application.
 
-It creates a mainwindow containing a text edit and responds to key presses.
-
-All of the other branches do something unique and interesting.
+Sent to qt as part of the bug report for QTBUG-46959.

@@ -3,31 +3,19 @@
 PiWin *win = NULL;
 
 //-------------------------------------------------------------------------
-void MyTextEdit::msg(const char *format, ...)
+void PiWin::timerEvent(QTimerEvent *)
 {
-  va_list va;
-  va_start(va, format);
-  QString text;
-  text.vsprintf(format, va);
-  moveCursor(QTextCursor::End);
-  insertPlainText(text);
-  va_end(va);
+  statusBar()->update();
 }
 
 //-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
-  te = new MyTextEdit;
-  te->setAttribute(Qt::WA_InputMethodEnabled, false);
-  te->setReadOnly(true);
-  setCentralWidget(te);
-  setObjectName("PiWin");
-}
+  resize(QDesktopWidget().availableGeometry(this).size() * 0.9);
 
-//-------------------------------------------------------------------------
-void PiWin::keyPressEvent(QKeyEvent *e)
-{
-  te->msg("key pressed: 0x%08x\n", e->key());
+  statusBar()->addWidget(new QLabel("test"));
+
+  timer.start(100, this);
 }
 
 //-------------------------------------------------------------------------
