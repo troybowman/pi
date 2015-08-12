@@ -19,7 +19,7 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
 //-------------------------------------------------------------------------
 void PiWin::savePixmaps()
 {
-  QRect r(QPoint(30, 10), QPoint(35, 50));
+  QRect r(QPoint(30, 10), QPoint(30, 50));
 
   // gray out the whole window, except one special region
   QRect wr = w->rect();

@@ -7,12 +7,6 @@
 #include <QtGui>
 #endif
 
-#if defined(__GNUC__)
-#define AS_PRINTF(format_idx, varg_idx) __attribute__((format(printf, format_idx, varg_idx)))
-#else
-#define AS_PRINTF(format_idx, varg_idx)
-#endif
-
 class PiWin;
 extern PiWin *win;
 
