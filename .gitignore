@@ -1,0 +1,5 @@
+pi.app
+Makefile
+*stash
+obj/
+*.swp
