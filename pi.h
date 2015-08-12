@@ -28,32 +28,24 @@ public:
 };
 
 //-------------------------------------------------------------------------
-class MyTextEdit : public QTextEdit
-{
-  Q_OBJECT
-  typedef QTextEdit inherited;
-
-public:
-  MyTextEdit(QWidget *parent = 0) : inherited(parent) {}
-  virtual ~MyTextEdit() {}
-
-  AS_PRINTF(2, 3) void msg(const char *format, ...);
-};
-
-//-------------------------------------------------------------------------
 class PiWin : public QMainWindow
 {
   Q_OBJECT
   typedef QMainWindow inherited;
 
-  MyTextEdit *te;
+  QLabel *w;
+  QAction *save;
+  QMenu *file;
 
 protected:
-  virtual void keyPressEvent(QKeyEvent *e);
+  virtual void paintEvent(QPaintEvent *e);
 
 public:
   PiWin(QWidget *parent = 0);
   virtual ~PiWin() {}
+
+public slots:
+  void savePixmaps();
 };
 
 #endif // PI_H
