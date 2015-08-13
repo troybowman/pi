@@ -27,9 +27,11 @@ class PiWin : public QMainWindow
   Q_OBJECT
   typedef QMainWindow inherited;
 
-  QLabel *w;
+  QLabel *viewport;
   QAction *save;
   QMenu *file;
+
+  QPixmap rendered_screen;
 
 protected:
   virtual void paintEvent(QPaintEvent *e);

@@ -5,8 +5,8 @@ PiWin *win = NULL;
 //-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
-  w = new QLabel;
-  setCentralWidget(w);
+  viewport = new QLabel;
+  setCentralWidget(viewport);
 
   file = new QMenu("File");
   menuBar()->addMenu(file);
@@ -21,22 +21,17 @@ void PiWin::savePixmaps()
 {
   QRect r(QPoint(30, 10), QPoint(30, 50));
 
-  // gray out the whole window, except one special region
-  QRect wr = w->rect();
-  QPixmap wp = w->grab(wr);
+  // grey-out the view everywhere except r
+  QPixmap ctx = rendered_screen.copy();
+  QPainter p(&ctx);
+  p.fillRect(ctx.rect(), QBrush(QColor(0, 0, 0, 0x80)));
+  p.drawPixmap(r, rendered_screen, r);
 
-  QPainter painter(&wp);
-  painter.setClipRect(r);
+  ctx.save("/tmp/test1.png");
 
-  QRegion inverse = QRegion(wr).subtracted(painter.clipRegion());
-  painter.setClipRegion(inverse);
-  painter.fillRect(wr, QBrush(QColor(0, 0, 0, 0x80)));
-
-  wp.save("/tmp/test1.png");
-
-  // grab the special region and save it
-  QPixmap test = w->grab(r);
-  test.save("/tmp/test2.png");
+  // get a pixmap for r and save it
+  QPixmap pm = rendered_screen.copy(r);
+  pm.save("/tmp/test2.png");
 }
 
 //-------------------------------------------------------------------------
@@ -44,14 +39,18 @@ void PiWin::paintEvent(QPaintEvent *e)
 {
   inherited::paintEvent(e);
 
-  QPixmap pm(w->size());
+  QPixmap pm(viewport->size());
   pm.fill(QColor(Qt::blue));
+  {
+    // this is in a scope block to prevent a QPixmap::copy()
+    // when assigning to rendered_screen
+    QPainter p(&pm);
+    QRect r(QPoint(20, 20), QPoint(40, 40));
+    p.fillRect(r, QColor(Qt::white));
+  }
+  rendered_screen = pm;
 
-  QPainter p(&pm);
-  QRect r(QPoint(20, 20), QPoint(40, 40));
-  p.fillRect(r, QColor(Qt::white));
-
-  w->setPixmap(pm);
+  viewport->setPixmap(rendered_screen);
 }
 
 //-------------------------------------------------------------------------
