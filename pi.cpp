@@ -22,12 +22,28 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   te->setReadOnly(true);
   setCentralWidget(te);
   setObjectName("PiWin");
+
+  QMenu *file = new QMenu("File");
+  menuBar()->addMenu(file);
+
+  fuckYou = new QAction("fuck you!", this);
+  fuckYou->setShortcut(tr("Ctrl+F"));
+  connect(fuckYou, SIGNAL(triggered()), this, SLOT(fuckYouToo()));
+
+  file->addAction(fuckYou);
 }
 
 //-------------------------------------------------------------------------
 void PiWin::keyPressEvent(QKeyEvent *e)
 {
   te->msg("key pressed: 0x%08x\n", e->key());
+  te->msg("  modifiers: 0x%08x\n", (int)e->modifiers());
+}
+
+//-------------------------------------------------------------------------
+void PiWin::fuckYouToo()
+{
+  te->msg("fuck you too!\n");
 }
 
 //-------------------------------------------------------------------------

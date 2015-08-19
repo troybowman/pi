@@ -47,6 +47,7 @@ class PiWin : public QMainWindow
   typedef QMainWindow inherited;
 
   MyTextEdit *te;
+  QAction *fuckYou;
 
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
@@ -54,6 +55,9 @@ protected:
 public:
   PiWin(QWidget *parent = 0);
   virtual ~PiWin() {}
+
+public slots:
+  void fuckYouToo();
 };
 
 #endif // PI_H
