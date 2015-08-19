@@ -21,7 +21,7 @@ SOURCES += pi.cpp
 
 equals(QT_MAJOR_VERSION, 5) {
   DEFINES += __QT5__
-  QMAKE_LFLAGS += -framework QtWidgets
+  QT += widgets
 }
 
 CONFIG -= release release_and_debug
