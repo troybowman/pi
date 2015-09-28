@@ -50,6 +50,7 @@ class PiWin : public QMainWindow
 
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
+  virtual void closeEvent(QCloseEvent *);
 
 public:
   PiWin(QWidget *parent = 0);

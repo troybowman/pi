@@ -31,6 +31,12 @@ void PiWin::keyPressEvent(QKeyEvent *e)
 }
 
 //-------------------------------------------------------------------------
+void PiWin::closeEvent(QCloseEvent *e)
+{
+  e->accept();
+}
+
+//-------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
   PiApp a(argc, argv);
