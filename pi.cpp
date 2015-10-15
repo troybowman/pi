@@ -17,6 +17,8 @@ void MyTextEdit::msg(const char *format, ...)
 //-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
+  resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
+
   te = new MyTextEdit;
   te->setAttribute(Qt::WA_InputMethodEnabled, false);
   te->setReadOnly(true);
@@ -26,25 +28,36 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   QMenu *file = new QMenu("File");
   menuBar()->addMenu(file);
 
-  fuckYou = new QAction("fuck you!", this);
-  fuckYou->setShortcut(tr("Ctrl+F"));
-  connect(fuckYou, SIGNAL(triggered()), this, SLOT(fuckYouToo()));
+#define ADD_ACTION(action, shortcut)                                     \
+do                                                                       \
+{                                                                        \
+  action = new QAction(this);                                            \
+  action->setShortcut(tr(shortcut));                                     \
+  connect(action, SIGNAL(triggered()), this, SLOT(action##Triggered())); \
+  file->addAction(action);                                               \
+} while ( false )
 
-  file->addAction(fuckYou);
+  ADD_ACTION(test1, "Alt+S"); // works
+  ADD_ACTION(test2, "Alt+X"); // doesn't work
+  ADD_ACTION(test3, "Alt+P"); // doesn't work
+  ADD_ACTION(test4, "Alt+T"); // works
+  ADD_ACTION(test5, "Alt+M"); // doesn't work
+
+#undef ADD_ACTION
 }
 
 //-------------------------------------------------------------------------
 void PiWin::keyPressEvent(QKeyEvent *e)
 {
-  te->msg("key pressed: 0x%08x\n", e->key());
-  te->msg("  modifiers: 0x%08x\n", (int)e->modifiers());
+  te->msg("key: 0x%08x (modifiers = 0x%08x)\n", e->key(), (int)e->modifiers());
 }
 
 //-------------------------------------------------------------------------
-void PiWin::fuckYouToo()
-{
-  te->msg("fuck you too!\n");
-}
+void PiWin::test1Triggered() { te->msg(" * shortcut for test1 *\n"); }
+void PiWin::test2Triggered() { te->msg(" * shortcut for test2 *\n"); }
+void PiWin::test3Triggered() { te->msg(" * shortcut for test3 *\n"); }
+void PiWin::test4Triggered() { te->msg(" * shortcut for test4 *\n"); }
+void PiWin::test5Triggered() { te->msg(" * shortcut for test5 *\n"); }
 
 //-------------------------------------------------------------------------
 int main(int argc, char *argv[])

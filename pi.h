@@ -47,7 +47,12 @@ class PiWin : public QMainWindow
   typedef QMainWindow inherited;
 
   MyTextEdit *te;
-  QAction *fuckYou;
+
+  QAction *test1;
+  QAction *test2;
+  QAction *test3;
+  QAction *test4;
+  QAction *test5;
 
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
@@ -57,7 +62,11 @@ public:
   virtual ~PiWin() {}
 
 public slots:
-  void fuckYouToo();
+  void test1Triggered();
+  void test2Triggered();
+  void test3Triggered();
+  void test4Triggered();
+  void test5Triggered();
 };
 
 #endif // PI_H
