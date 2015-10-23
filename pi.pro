@@ -26,3 +26,11 @@ equals(QT_MAJOR_VERSION, 5) {
 
 CONFIG -= release release_and_debug
 CONFIG += debug
+
+extralib.target = extra
+extralib.commands = rm -rf pi.app
+extralib.depends =
+QMAKE_EXTRA_TARGETS += extralib
+PRE_TARGETDEPS = extra
+
+QMAKE_POST_LINK += python deploy.py

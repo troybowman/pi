@@ -37,11 +37,11 @@ do                                                                       \
   file->addAction(action);                                               \
 } while ( false )
 
-  ADD_ACTION(test1, "Alt+S"); // works
-  ADD_ACTION(test2, "Alt+X"); // doesn't work
-  ADD_ACTION(test3, "Alt+P"); // doesn't work
-  ADD_ACTION(test4, "Alt+T"); // works
-  ADD_ACTION(test5, "Alt+M"); // doesn't work
+  ADD_ACTION(test1, "Alt+S");
+  ADD_ACTION(test2, "Alt+X");
+  ADD_ACTION(test3, "Ctrl+K");
+  ADD_ACTION(test4, "T");
+  ADD_ACTION(test5, "Meta+Q");
 
 #undef ADD_ACTION
 }
