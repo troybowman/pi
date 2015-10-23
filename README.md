@@ -1,3 +1,1 @@
-A simple Qt application.
-
-It shows how to create a simple QAction with a shortcut
+A simple Qt application, with Squish tests!
