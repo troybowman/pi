@@ -19,18 +19,7 @@ QMAKE_CFLAGS_WARN_ON += $${CFLAGS}
 HEADERS += pi.h
 SOURCES += pi.cpp
 
-equals(QT_MAJOR_VERSION, 5) {
-  DEFINES += __QT5__
-  QT += widgets
-}
+QT += widgets
 
 CONFIG -= release release_and_debug
 CONFIG += debug
-
-extralib.target = extra
-extralib.commands = rm -rf pi.app
-extralib.depends =
-QMAKE_EXTRA_TARGETS += extralib
-PRE_TARGETDEPS = extra
-
-QMAKE_POST_LINK += python deploy.py
