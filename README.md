@@ -1,3 +1,3 @@
 A simple Qt application.
 
-It shows how to create a simple QAction with a shortcut
+It tests the fix I wrote for QTBUG-42584.

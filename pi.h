@@ -48,12 +48,6 @@ class PiWin : public QMainWindow
 
   MyTextEdit *te;
 
-  QAction *test1;
-  QAction *test2;
-  QAction *test3;
-  QAction *test4;
-  QAction *test5;
-
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
 
@@ -62,11 +56,59 @@ public:
   virtual ~PiWin() {}
 
 public slots:
-  void test1Triggered();
-  void test2Triggered();
-  void test3Triggered();
-  void test4Triggered();
-  void test5Triggered();
+#define DECLARE_SLOT(act_name) void act_name##Triggered()
+
+  DECLARE_SLOT(test1);
+  DECLARE_SLOT(test2);
+  DECLARE_SLOT(test3);
+  DECLARE_SLOT(test4);
+  DECLARE_SLOT(test5);
+  DECLARE_SLOT(test6);
+  DECLARE_SLOT(test7);
+  DECLARE_SLOT(test8);
+  DECLARE_SLOT(test9);
+  DECLARE_SLOT(test10);
+  DECLARE_SLOT(test11);
+  DECLARE_SLOT(test12);
+  DECLARE_SLOT(test13);
+  DECLARE_SLOT(test14);
+  DECLARE_SLOT(test15);
+  DECLARE_SLOT(test16);
+  DECLARE_SLOT(test17);
+  DECLARE_SLOT(test18);
+  DECLARE_SLOT(test19);
+  DECLARE_SLOT(test20);
+  DECLARE_SLOT(test21);
+  DECLARE_SLOT(test22);
+  DECLARE_SLOT(test23);
+  DECLARE_SLOT(test24);
+  DECLARE_SLOT(test25);
+  DECLARE_SLOT(test26);
+  DECLARE_SLOT(test27);
+  DECLARE_SLOT(test28);
+  DECLARE_SLOT(test29);
+  DECLARE_SLOT(test30);
+  DECLARE_SLOT(test31);
+  DECLARE_SLOT(test32);
+  DECLARE_SLOT(test33);
+  DECLARE_SLOT(test34);
+  DECLARE_SLOT(test35);
+  DECLARE_SLOT(test36);
+  DECLARE_SLOT(test37);
+  DECLARE_SLOT(test38);
+  DECLARE_SLOT(test39);
+  DECLARE_SLOT(test40);
+  DECLARE_SLOT(test41);
+  DECLARE_SLOT(test42);
+  DECLARE_SLOT(test43);
+  DECLARE_SLOT(test44);
+  DECLARE_SLOT(test45);
+  DECLARE_SLOT(test46);
+  DECLARE_SLOT(test47);
+  DECLARE_SLOT(test48);
+  DECLARE_SLOT(test49);
+
+#undef DECLARE_SLOT
 };
 
 #endif // PI_H
