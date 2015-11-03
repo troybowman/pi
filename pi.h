@@ -56,7 +56,7 @@ public:
   virtual ~PiWin() {}
 
 public slots:
-#define DECLARE_SLOT(act_name) void act_name##Triggered()
+#define DECLARE_SLOT(act) void act##Triggered()
 
   DECLARE_SLOT(test1);
   DECLARE_SLOT(test2);
@@ -107,6 +107,15 @@ public slots:
   DECLARE_SLOT(test47);
   DECLARE_SLOT(test48);
   DECLARE_SLOT(test49);
+  DECLARE_SLOT(test50);
+  DECLARE_SLOT(test51);
+  DECLARE_SLOT(test52);
+  DECLARE_SLOT(test53);
+  DECLARE_SLOT(test54);
+  DECLARE_SLOT(test55);
+  DECLARE_SLOT(test56);
+  DECLARE_SLOT(test57);
+  DECLARE_SLOT(test58);
 
 #undef DECLARE_SLOT
 };

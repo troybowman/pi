@@ -28,13 +28,13 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   QMenu *file = new QMenu("File");
   menuBar()->addMenu(file);
 
-#define ADD_ACTION(act_name, shortcut)                                       \
-do                                                                           \
-{                                                                            \
-  QAction *act_name = new QAction(this);                                     \
-  act_name->setShortcut(tr(shortcut));                                       \
-  connect(act_name, SIGNAL(triggered()), this, SLOT(act_name##Triggered())); \
-  file->addAction(act_name);                                                 \
+#define ADD_ACTION(act, shortcut)                                  \
+do                                                                 \
+{                                                                  \
+  QAction *act = new QAction(this);                                \
+  act->setShortcut(tr(shortcut));                                  \
+  connect(act, SIGNAL(triggered()), this, SLOT(act##Triggered())); \
+  file->addAction(act);                                            \
 } while ( false )
 
   ADD_ACTION(test1,  "Alt+A");
@@ -87,6 +87,15 @@ do                                                                           \
   ADD_ACTION(test47, "Alt+0");
   ADD_ACTION(test48, "Alt++");
   ADD_ACTION(test49, "Alt+-");
+  ADD_ACTION(test50, "Alt+[");
+  ADD_ACTION(test51, "Alt+]");
+  ADD_ACTION(test52, "Alt+;");
+  ADD_ACTION(test53, "Alt+'");
+  ADD_ACTION(test54, "Alt+,");
+  ADD_ACTION(test55, "Alt+/");
+  ADD_ACTION(test56, "Alt+.");
+  ADD_ACTION(test57, "Alt+-");
+  ADD_ACTION(test58, "Alt+=");
 
 #undef ADD_ACTION
 }
@@ -98,11 +107,7 @@ void PiWin::keyPressEvent(QKeyEvent *e)
 }
 
 //-------------------------------------------------------------------------
-#define DEFINE_SLOT(act_name)                 \
-void PiWin::act_name##Triggered()             \
-{                                             \
-  te->msg(" * shortcut for "#act_name" *\n"); \
-}
+#define DEFINE_SLOT(act) void PiWin::act##Triggered() { te->msg(" * shortcut for "#act" *\n"); }
 
 DEFINE_SLOT(test1)
 DEFINE_SLOT(test2)
@@ -153,6 +158,15 @@ DEFINE_SLOT(test46)
 DEFINE_SLOT(test47)
 DEFINE_SLOT(test48)
 DEFINE_SLOT(test49)
+DEFINE_SLOT(test50)
+DEFINE_SLOT(test51)
+DEFINE_SLOT(test52)
+DEFINE_SLOT(test53)
+DEFINE_SLOT(test54)
+DEFINE_SLOT(test55)
+DEFINE_SLOT(test56)
+DEFINE_SLOT(test57)
+DEFINE_SLOT(test58)
 
 #undef DEFINE_SLOT
 
