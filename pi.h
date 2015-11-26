@@ -23,14 +23,13 @@ class PiWin : public QMainWindow
   Q_OBJECT
   typedef QMainWindow inherited;
 
-  QAction *message;
-
 public:
   PiWin(QWidget *parent = 0);
   virtual ~PiWin() {}
 
 public slots:
   void messageTriggered();
+  void newinstTriggered();
 };
 
 #endif // PI_H
