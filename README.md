@@ -1,1 +1,1 @@
-A simple Qt application, with Squish tests!
+A simple Qt application for testing Squish
