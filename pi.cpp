@@ -11,17 +11,17 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   QMenu *file = new QMenu("File");
   menuBar()->addMenu(file);
 
-#define ADD_ACT(act_name, shortcut)                                          \
+#define ADD_ACT(act_name, shortcut, desc)                                    \
 do                                                                           \
 {                                                                            \
-  QAction *act_name = new QAction(this);                                     \
+  QAction *act_name = new QAction(desc, this);                               \
   act_name->setShortcut(tr(shortcut));                                       \
   connect(act_name, SIGNAL(triggered()), this, SLOT(act_name##Triggered())); \
   file->addAction(act_name);                                                 \
 } while ( false )
 
-  ADD_ACT(message, "M");
-  ADD_ACT(newinst, "N");
+  ADD_ACT(message, "M", "Show a message");
+  ADD_ACT(newinst, "N", "Launch a new instance");
 }
 
 //-------------------------------------------------------------------------
@@ -36,13 +36,7 @@ void PiWin::messageTriggered()
 //-------------------------------------------------------------------------
 void PiWin::newinstTriggered()
 {
-  QString s = qApp->applicationFilePath();
-  if ( s.indexOf(' ') != -1 && !s.startsWith('"') )
-  {
-    s.insert(0, "\"");
-    s.append("\"");
-  }
-  QProcess::startDetached(s);
+  QProcess::startDetached(qApp->applicationFilePath());
 }
 
 //-------------------------------------------------------------------------
