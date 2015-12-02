@@ -17,6 +17,26 @@ class PiWin;
 extern PiWin *win;
 
 //-------------------------------------------------------------------------
+class PiDialog : public QDialog
+{
+  Q_OBJECT
+  typedef QDialog inherited;
+
+  int counter;
+  QLabel *label;
+  QTimer *timer;
+
+public:
+  PiDialog(QWidget *parent);
+
+protected:
+  void showEvent(QShowEvent *);
+
+public slots:
+  void updateLabel();
+};
+
+//-------------------------------------------------------------------------
 class PiApp : public QApplication
 {
   Q_OBJECT
@@ -28,14 +48,14 @@ public:
 };
 
 //-------------------------------------------------------------------------
-class MyTextEdit : public QTextEdit
+class PiTextEdit : public QTextEdit
 {
   Q_OBJECT
   typedef QTextEdit inherited;
 
 public:
-  MyTextEdit(QWidget *parent = 0) : inherited(parent) {}
-  virtual ~MyTextEdit() {}
+  PiTextEdit(QWidget *parent = 0) : inherited(parent) {}
+  virtual ~PiTextEdit() {}
 
   AS_PRINTF(2, 3) void msg(const char *format, ...);
 };
@@ -46,16 +66,13 @@ class PiWin : public QMainWindow
   Q_OBJECT
   typedef QMainWindow inherited;
 
-  MyTextEdit *te;
-  QMenu *fileMenu;
-  QAction *colors;
+  PiTextEdit *te;
 
   QBasicTimer timer1;
   QBasicTimer timer2;
-  QBasicTimer colorDlgTimer;
+  QBasicTimer msgTimer;
 
 protected:
-  virtual void keyPressEvent(QKeyEvent *e);
   virtual void timerEvent(QTimerEvent *e);
 
 public:
@@ -63,7 +80,8 @@ public:
   virtual ~PiWin() {}
 
 public slots:
-  void showColorDialog();
+  void msgTriggered();
+  void dlgTriggered();
 };
 
 #endif // PI_H
