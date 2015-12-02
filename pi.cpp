@@ -22,6 +22,8 @@ do                                                                           \
 
   ADD_ACT(message, "M", "Show a message");
   ADD_ACT(newinst, "N", "Launch a new instance");
+
+#undef ADD_ACT
 }
 
 //-------------------------------------------------------------------------
