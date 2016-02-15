@@ -3,31 +3,22 @@
 PiWin *win = NULL;
 
 //-------------------------------------------------------------------------
-void MyTextEdit::msg(const char *format, ...)
-{
-  va_list va;
-  va_start(va, format);
-  QString text;
-  text.vsprintf(format, va);
-  moveCursor(QTextCursor::End);
-  insertPlainText(text);
-  va_end(va);
-}
-
-//-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
-  te = new MyTextEdit;
-  te->setAttribute(Qt::WA_InputMethodEnabled, false);
-  te->setReadOnly(true);
-  setCentralWidget(te);
-  setObjectName("PiWin");
+  QMenu *file = new QMenu("File");
+  menuBar()->addMenu(file);
+
+  QAction *action = new QAction("Show a QFontDialog", this);
+  action->setShortcut(tr("F"));
+  connect(action, SIGNAL(triggered()), this, SLOT(showFontDialog()));
+  file->addAction(action);
 }
 
 //-------------------------------------------------------------------------
-void PiWin::keyPressEvent(QKeyEvent *e)
+void PiWin::showFontDialog()
 {
-  te->msg("key pressed: 0x%08x\n", e->key());
+  QFontDialog fd;
+  fd.exec();
 }
 
 //-------------------------------------------------------------------------
