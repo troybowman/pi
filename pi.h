@@ -14,7 +14,6 @@ class PiApp : public QApplication
 
 public:
   PiApp(int &argc, char **argv) : inherited(argc, argv) {}
-  virtual ~PiApp(void) {}
 };
 
 //-------------------------------------------------------------------------
@@ -23,11 +22,27 @@ class PiWin : public QMainWindow
   Q_OBJECT
   typedef QMainWindow inherited;
 
+  QTextEdit *te;
+
 public:
-  PiWin(QWidget *parent = 0);
+  PiWin(QWidget *parent = NULL);
 
 public slots:
-  void showFontDialog();
+  void chooseFont();
+};
+
+//-------------------------------------------------------------------------
+class PiFontDialog : public QFontDialog
+{
+  Q_OBJECT
+  typedef QFontDialog inherited;
+
+public:
+  QFont selectedFont;
+  PiFontDialog(const QFont &font);
+
+public slots:
+  void onFontSelected(const QFont &font);
 };
 
 #endif // PI_H
