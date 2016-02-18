@@ -1,0 +1,2 @@
+mactest: mactest.cpp
+	g++ -g -m32 -o $@ $< -framework CoreFoundation -framework CoreText
