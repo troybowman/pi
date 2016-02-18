@@ -4,3 +4,5 @@ obj/
 Makefile
 *.stash
 pi
+mactest
+mactest.dSYM
