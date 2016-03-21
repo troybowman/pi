@@ -5,7 +5,7 @@
 // It does not correctly identify monospace fonts like Menlo and Monaco for some reason.
 
 //-----------------------------------------------------------------------------
-enum font_descriptor_t
+enum font_status_t
 {
   FD_FIXEDWIDTH,
   FD_VARWIDTH,
@@ -13,7 +13,7 @@ enum font_descriptor_t
 };
 
 //-----------------------------------------------------------------------------
-static font_descriptor_t get_font_descriptor(const char *family)
+static font_status_t get_font_status(const char *family)
 {
   CFMutableDictionaryRef attributes = CFDictionaryCreateMutable(
       kCFAllocatorDefault,
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  switch ( get_font_descriptor(argv[1]) )
+  switch ( get_font_status(argv[1]) )
   {
     case FD_NOMATCH:
       printf("Error: could not find any matching fonts for family \"%s\"\n", argv[1]);
