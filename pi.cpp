@@ -5,7 +5,7 @@ PiWin *win = NULL;
 //-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
-  resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
+  //resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
   setObjectName("PiWin");
 
   QMenu *file = new QMenu("File");
