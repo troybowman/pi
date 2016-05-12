@@ -6,7 +6,6 @@ import glob
 import re
 
 if sys.platform == "darwin":
-
     def patch_qt_install_names(lib):
         rpath_re = re.compile("(@rpath/Qt[^\s]+\.framework/Versions/[0-9]+/Qt[^\s]+).*")
         for line in subprocess.check_output(["otool", "-L", lib]).split("\n\t"):
@@ -36,13 +35,18 @@ if sys.platform == "darwin":
     shutil.rmtree("pi.app")
     subprocess.check_call(["make", "clean"])
     subprocess.check_call(["make"])
-    subprocess.check_call(["/Users/Shared/Qt/5.5.1/bin/macdeployqt", "pi.app", "-use-debug-libs"])
-    shutil.copytree("/Users/Shared/Qt/5.5.1/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
-    make_macdeployqt_actually_work("/Users/Shared/Qt/5.5.1", "pi.app", "pi")
+    subprocess.check_call(["/Users/Shared/Qt/5.6.0/bin/macdeployqt", "pi.app", "-use-debug-libs"])
+    shutil.copytree("/Users/Shared/Qt/5.6.0/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
+    make_macdeployqt_actually_work("/Users/Shared/Qt/5.6.0", "pi.app", "pi")
 
 elif sys.platform == "win32":
-
     subprocess.check_call(["nmake", "clean"])
-    subprocess.check_call(["C:\\Qt\\5.5.1\\bin\\qmake"])
+    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\qmake"])
     subprocess.check_call(["nmake"])
-    subprocess.check_call(["C:\\Qt\\5.5.1\\bin\\windeployqt", "pi.exe"])
+    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\windeployqt", "pi.exe"])
+
+elif sys.platform == "linux2":
+    subprocess.check_call(["make"])
+
+else:
+    raise Exception("Error: unsupported platform")
