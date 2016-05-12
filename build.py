@@ -35,7 +35,8 @@ if sys.platform == "darwin":
             shutil.copy(os.path.join(qtdir, "plugins", "platforms", "libqcocoa_debug.dylib"), os.path.dirname(libqcocoa))
             patch_qt_install_names(libqcocoa % "_debug")
 
-    shutil.rmtree("pi.app")
+    shutil.rmtree("pi.app", ignore_errors=True)
+    subprocess.check_call([os.path.join(QTPATH, "bin", "qmake")])
     subprocess.check_call(["make", "clean"])
     subprocess.check_call(["make"])
     subprocess.check_call([os.path.join(QTPATH, "bin", "macdeployqt"), "pi.app", "-use-debug-libs"])
