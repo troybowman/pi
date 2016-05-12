@@ -7,7 +7,7 @@ import re
 
 if sys.platform == "darwin":
 
-    QTPATH="/Users/Shared/Qt/5.6.0/"
+    QTPATH="/Users/Shared/Qt/5.6.0"
 
     def patch_qt_install_names(lib):
         rpath_re = re.compile("(@rpath/Qt[^\s]+\.framework/Versions/[0-9]+/Qt[^\s]+).*")
@@ -45,12 +45,16 @@ if sys.platform == "darwin":
 
 elif sys.platform == "win32":
 
+    QTPATH="C:\\Qt\\5.6.0"
+
     subprocess.check_call(["nmake", "clean"])
-    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\qmake"])
+    subprocess.check_call([os.path.join(QTPATH, "bin", "qmake.exe")])
     subprocess.check_call(["nmake"])
-    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\windeployqt", "pi.exe"])
+    subprocess.check_call([os.path.join(QTPATH, "bin", "windeployqt"), "pi.exe"])
 
 elif sys.platform == "linux2":
+
+    QTPATH="/usr/local/Qt/5.6.0"
 
     subprocess.check_call([os.path.join(QTPATH, "bin", "qmake")])
     subprocess.check_call(["make", "clean"])
