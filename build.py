@@ -52,6 +52,8 @@ elif sys.platform == "win32":
 
 elif sys.platform == "linux2":
 
+    subprocess.check_call([os.path.join(QTPATH, "bin", "qmake")])
+    subprocess.check_call(["make", "clean"])
     subprocess.check_call(["make"])
 
 else:
