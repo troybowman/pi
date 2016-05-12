@@ -5,6 +5,7 @@ PiWin *win = NULL;
 //-------------------------------------------------------------------------
 PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
+  // FIXME: why does this cause squish to crash?
   //resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
   setObjectName("PiWin");
 
