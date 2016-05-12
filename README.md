@@ -1,3 +1,5 @@
 A simple Qt application.
 
-It creates a QTextEdit and allows you to change the font via a QFontDialog.
+It creates a mainwindow containing a text edit and responds to key presses.
+
+All of the other branches do something unique and interesting.
