@@ -19,10 +19,10 @@ if sys.platform == "darwin":
                     print "patching install name: %s" % argv
                     subprocess.check_call(argv)
 
-    # We use this to point idaq's install names to debug Qt frameworks, because of https://bugreports.qt.io/browse/QTBUG-48800.
-    def make_macdeployqt_actually_work(qtdir, appdir, idaq):
-        # patch idaq to refer to debug Qt Libs
-        patch_qt_install_names(os.path.join(appdir, "Contents", "MacOS", idaq))
+    # We use this to point the install names to debug Qt frameworks, because of https://bugreports.qt.io/browse/QTBUG-48800.
+    def make_macdeployqt_actually_work(qtdir, appdir, pi):
+        # patch pi to refer to debug Qt Libs
+        patch_qt_install_names(os.path.join(appdir, "Contents", "MacOS", pi))
         # patch the debug Qt libs themselves
         for lib in glob.glob(os.path.join(appdir, "Contents", "Frameworks", "Qt*.framework", "Versions", "Current", "*_debug")):
             patch_qt_install_names(lib)

@@ -1,5 +1,3 @@
-A simple Qt application.
-
-It creates a mainwindow containing a text edit and responds to key presses.
+This a simple Qt application. It is used to help understand and debug the Qt framework.
 
 All of the other branches do something unique and interesting.
