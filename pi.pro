@@ -3,6 +3,11 @@ TARGET = pi
 OBJECTS_DIR=./obj
 MOC_DIR=./obj
 
+mac {
+  QT += macextras
+  QMAKE_MAC_SDK = macosx10.12
+}
+
 CFLAGS+=-Wall                     \
         -fdiagnostics-show-option \
         -Wno-format               \
