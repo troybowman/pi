@@ -48,11 +48,15 @@ class PiWin : public QMainWindow
 
   MyTextEdit *te;
 
-  QAction *test1;
-  QAction *test2;
-  QAction *test3;
-  QAction *test4;
-  QAction *test5;
+  QAction *action1;
+  QAction *action2;
+  QAction *action3;
+  QAction *action4;
+  QAction *action5;
+  QAction *action6;
+  QAction *action7;
+
+  void actionMessage(const char *shortcut) const;
 
 protected:
   virtual void keyPressEvent(QKeyEvent *e);
@@ -62,11 +66,13 @@ public:
   virtual ~PiWin() {}
 
 public slots:
-  void test1Triggered();
-  void test2Triggered();
-  void test3Triggered();
-  void test4Triggered();
-  void test5Triggered();
+  void action1Triggered();
+  void action2Triggered();
+  void action3Triggered();
+  void action4Triggered();
+  void action5Triggered();
+  void action6Triggered();
+  void action7Triggered();
 };
 
 #endif // PI_H

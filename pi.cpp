@@ -1,6 +1,7 @@
 #include "pi.h"
 
 PiWin *win = NULL;
+static FILE *fp = NULL;
 
 //-------------------------------------------------------------------------
 void MyTextEdit::msg(const char *format, ...)
@@ -11,6 +12,7 @@ void MyTextEdit::msg(const char *format, ...)
   text.vsprintf(format, va);
   moveCursor(QTextCursor::End);
   insertPlainText(text);
+  fprintf(fp, "%s", text.toLocal8Bit().constData());
   va_end(va);
 }
 
@@ -28,6 +30,14 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   QMenu *file = new QMenu("File");
   menuBar()->addMenu(file);
 
+#define SC1 "X"
+#define SC2 "Alt+X"
+#define SC3 ";"
+#define SC4 ":"
+#define SC5 "F5"
+#define SC6 "F6"
+#define SC7 "Shift+R"
+
 #define ADD_ACTION(action, shortcut)                                     \
 do                                                                       \
 {                                                                        \
@@ -37,11 +47,13 @@ do                                                                       \
   file->addAction(action);                                               \
 } while ( false )
 
-  ADD_ACTION(test1, "Alt+S"); // works
-  ADD_ACTION(test2, "Alt+X"); // doesn't work
-  ADD_ACTION(test3, "Alt+P"); // doesn't work
-  ADD_ACTION(test4, "Alt+T"); // works
-  ADD_ACTION(test5, "Alt+M"); // doesn't work
+  ADD_ACTION(action1, SC1);
+  ADD_ACTION(action2, SC2);
+  ADD_ACTION(action3, SC3);
+  ADD_ACTION(action4, SC4);
+  ADD_ACTION(action5, SC5);
+  ADD_ACTION(action6, SC6);
+  ADD_ACTION(action7, SC7);
 
 #undef ADD_ACTION
 }
@@ -53,20 +65,32 @@ void PiWin::keyPressEvent(QKeyEvent *e)
 }
 
 //-------------------------------------------------------------------------
-void PiWin::test1Triggered() { te->msg(" * shortcut for test1 *\n"); }
-void PiWin::test2Triggered() { te->msg(" * shortcut for test2 *\n"); }
-void PiWin::test3Triggered() { te->msg(" * shortcut for test3 *\n"); }
-void PiWin::test4Triggered() { te->msg(" * shortcut for test4 *\n"); }
-void PiWin::test5Triggered() { te->msg(" * shortcut for test5 *\n"); }
+void PiWin::actionMessage(const char *shortcut) const
+{
+  te->msg("ACTION: \"%s\"\n", shortcut);
+}
+
+//-------------------------------------------------------------------------
+void PiWin::action1Triggered() { actionMessage(SC1); }
+void PiWin::action2Triggered() { actionMessage(SC2); }
+void PiWin::action3Triggered() { actionMessage(SC3); }
+void PiWin::action4Triggered() { actionMessage(SC4); }
+void PiWin::action5Triggered() { actionMessage(SC5); }
+void PiWin::action6Triggered() { actionMessage(SC6); }
+void PiWin::action7Triggered() { actionMessage(SC7); }
 
 //-------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
+  fp = fopen("/tmp/pi.log", "w");
+
   PiApp a(argc, argv);
   win = new PiWin;
 
   win->show();
   a.exec();
+
+  fclose(fp);
 
   return 0;
 }

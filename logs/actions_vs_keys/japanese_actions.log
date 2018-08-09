@@ -1,0 +1,6 @@
+ * shortcut for test1 *
+key: 0x01000023 (modifiers = 0x08000000)
+ * shortcut for test2 *
+ * shortcut for test3 *
+key: 0x01000020 (modifiers = 0x02000000)
+ * shortcut for test4 *
