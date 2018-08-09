@@ -1,0 +1,10 @@
+1. try non-japanese
+2. are the shortcuts disabled in the Shortcuts window?
+3. open the test app, try shortcuts:
+     ;
+     :
+     F5
+     F11
+     X
+     Alt+X
+     Shift+R

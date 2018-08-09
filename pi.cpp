@@ -34,8 +34,8 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
 #define SC2 "Alt+X"
 #define SC3 ";"
 #define SC4 ":"
-#define SC5 "F5"
-#define SC6 "F6"
+#define SC5 "F1"
+#define SC6 "F5"
 #define SC7 "Shift+R"
 
 #define ADD_ACTION(action, shortcut)                                     \
