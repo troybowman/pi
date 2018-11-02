@@ -13,6 +13,7 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
   menuBar()->addMenu(file);
 
   QAction *action = new QAction("Choose font", this);
+  action->setShortcut(tr("Ctrl+F"));
   connect(action, SIGNAL(triggered()), this, SLOT(chooseFont()));
   file->addAction(action);
 }

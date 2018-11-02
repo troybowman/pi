@@ -33,16 +33,17 @@ if sys.platform == "darwin":
             shutil.copy(os.path.join(qtdir, "plugins", "platforms", "libqcocoa_debug.dylib"), os.path.dirname(libqcocoa))
             patch_qt_install_names(libqcocoa % "_debug")
 
+    shutil.rmtree(".qmake.stash", ignore_errors=True)
     shutil.rmtree("pi.app", ignore_errors=True)
     subprocess.check_call(["make", "clean"])
     subprocess.check_call(["make"])
-    subprocess.check_call(["/Users/Shared/Qt/5.5.1/bin/macdeployqt", "pi.app", "-use-debug-libs"])
-    shutil.copytree("/Users/Shared/Qt/5.5.1/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
-    make_macdeployqt_actually_work("/Users/Shared/Qt/5.5.1", "pi.app", "pi")
+    subprocess.check_call(["/Users/Shared/Qt/5.6.3-x64/bin/macdeployqt", "pi.app", "-use-debug-libs"])
+    shutil.copytree("/Users/Shared/Qt/5.6.3-x64/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
+    make_macdeployqt_actually_work("/Users/Shared/Qt/5.6.3-x64", "pi.app", "pi")
 
 elif sys.platform == "win32":
 
     subprocess.check_call(["nmake", "clean"])
-    subprocess.check_call(["C:\\Qt\\5.5.1\\bin\\qmake"])
+    subprocess.check_call(["C:\\Qt\\5.6.3-x64\\bin\\qmake"])
     subprocess.check_call(["nmake"])
-    subprocess.check_call(["C:\\Qt\\5.5.1\\bin\\windeployqt", "pi.exe"])
+    subprocess.check_call(["C:\\Qt\\5.6.3-x64\\bin\\windeployqt", "pi.exe"])
