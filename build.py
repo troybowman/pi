@@ -36,13 +36,6 @@ if sys.platform == "darwin":
     shutil.rmtree("pi.app", ignore_errors=True)
     subprocess.check_call(["make", "clean"])
     subprocess.check_call(["make"])
-    subprocess.check_call(["/Users/Shared/Qt/5.6.0/bin/macdeployqt", "pi.app", "-use-debug-libs"])
-    shutil.copytree("/Users/Shared/Qt/5.6.0/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
-    make_macdeployqt_actually_work("/Users/Shared/Qt/5.6.0", "pi.app", "pi")
-
-elif sys.platform == "win32":
-
-    subprocess.check_call(["nmake", "clean"])
-    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\qmake"])
-    subprocess.check_call(["nmake"])
-    subprocess.check_call(["C:\\Qt\\5.6.0\\bin\\windeployqt", "pi.exe"])
+    subprocess.check_call(["/Users/Shared/Qt/5.6.3-x64/bin/macdeployqt", "pi.app", "-use-debug-libs"])
+    shutil.copytree("/Users/Shared/Qt/5.6.3-x64/lib/QtNetwork.framework", "pi.app/Contents/Frameworks/QtNetwork.framework", symlinks=True)
+    make_macdeployqt_actually_work("/Users/Shared/Qt/5.6.3-x64", "pi.app", "pi")

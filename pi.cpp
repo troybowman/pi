@@ -7,13 +7,27 @@ PiWin::PiWin(QWidget *parent) : inherited(parent)
 {
   resize(QDesktopWidget().availableGeometry(this).size() * 0.3);
 
-  QMenu *menu = new QMenu("File");
-  menuBar()->addMenu(menu);
+  te = new QTextEdit;
+  setCentralWidget(te);
 
-  QAction *action = new QAction(this);
-  action->setShortcut(tr("F"));
-  connect(action, SIGNAL(triggered()), this, SLOT(actionTriggered()));
-  menu->addAction(action);
+  QMenu *file = new QMenu("File");
+  menuBar()->addMenu(file);
+
+  QAction *dlgact = new QAction("Open File Dialog", this);
+  dlgact->setShortcut(tr("F"));
+  connect(dlgact, SIGNAL(triggered()), this, SLOT(actionTriggered()));
+  file->addAction(dlgact);
+
+  QMenu *edit = new QMenu("Edit");
+  menuBar()->addMenu(edit);
+
+  QAction *copy = new QAction("Copy", this);
+  copy->setShortcut(QKeySequence::Copy);
+  edit->addAction(copy);
+
+  QAction *paste = new QAction("Paste", this);
+  paste->setShortcut(QKeySequence::Paste);
+  edit->addAction(paste);
 }
 
 //-------------------------------------------------------------------------

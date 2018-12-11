@@ -23,6 +23,8 @@ class PiWin : public QMainWindow
   Q_OBJECT
   typedef QMainWindow inherited;
 
+  QTextEdit *te;
+
 public:
   PiWin(QWidget *parent = 0);
   virtual ~PiWin() {}
